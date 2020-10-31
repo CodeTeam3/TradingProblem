@@ -33,24 +33,23 @@ public class StockDataJudgingProgram {
 		double score = 0.00; // variable to hold the score
 
 		try {
-			String tradesFile = "";
+			String tradesFile = "C:\\Users\\Master oh Master\\Desktop\\Code-A-Thon-2020\\Test\\trading-problem\\src\\stock_test.txt";
 
 			// Get the location of the trades file either by user or by command line
 			// argument
-			if (args.length == 0) {
-				System.out.println("Enter filename: ");
-				Scanner input = new Scanner(System.in);
-				tradesFile = input.next();
-				input.close();
-			} else {
-				tradesFile = args[0];
-			}
+//			if (args.length == 0) {
+//				System.out.println("Enter filename: ");
+//				Scanner input = new Scanner(System.in);
+//				tradesFile = input.next();
+//				input.close();
+//			} else {
+//				tradesFile = args[0];
+//			}
 
 			ArrayList<String> str_trades = readAllTrades(tradesFile); // holds the trades in the file
 			ArrayList<Trade> trades = new ArrayList<Trade>(); // a place to store the trades before processing
 			TreeSet<String> uniqueStockTracker = new TreeSet<String>(); // a way to ensure unique date/symbol
 																		// combinations
-
 			// we need to ensure that the file ascends in date only, this helps track that
 			Calendar previousDate = new GregorianCalendar(1970, 1, 1, 0, 0, 0);
 			previousDate.setTimeInMillis(0L);
@@ -122,10 +121,8 @@ public class StockDataJudgingProgram {
 					Trade t = new Trade(action, date, symbol, qty, price, trade);
 					trades.add(t);
 				} catch (Exception ex) {
-					if (DEBUG) {
 						System.err.println(ex.getMessage());
 						System.err.println("Error processing trade: " + trade);
-					}
 				}
 			}
 
@@ -147,8 +144,9 @@ public class StockDataJudgingProgram {
 	 * 
 	 * @param tradesFile the filename of the file containing the trade list
 	 * @return an ArrayList containing the trades in the file
+	 * @throws FileNotFoundException 
 	 */
-	private static ArrayList<String> readAllTrades(String tradesFile) {
+	private static ArrayList<String> readAllTrades(String tradesFile) throws FileNotFoundException {
 		ArrayList<String> linesToRead = new ArrayList<String>();
 		try {
 			// Need to cast the return result to an ArrayList

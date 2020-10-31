@@ -7,11 +7,14 @@ public class Ticker {
 	double shares = 0;
 	double equity = 0;
 	double averagePrice = 0;
+	double high = 0;
+	double low = 0;
 	//	Constructors
-	public Ticker(String symbol, double price) {
+	public Ticker(String symbol, double low, double high) {
 		this.symbol = symbol;
-		this.price = price;
-		this.equity = price * shares;
+		this.low = low;
+		this.high = high;
+		this.equity = low * shares;
 	}
 	//	Getters
 	public String getSymbol() {

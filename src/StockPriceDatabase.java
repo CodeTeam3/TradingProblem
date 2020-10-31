@@ -92,7 +92,7 @@ public class StockPriceDatabase {
 			String year = d.get(Calendar.YEAR)+"";
 			String month = td(d.get(Calendar.MONTH) + 1);
 			String day = td(d.get(Calendar.DAY_OF_MONTH));
-			String filename = "stockdata/NASDAQ_" + year + "/NASDAQ_" + year + month + day + ".csv";
+			String filename = "C:\\Users\\Master oh Master\\Desktop\\Code-A-Thon-2020\\codeathon-trading-problem\\src\\stockdata\\NASDAQ_" + year + "/NASDAQ_" + year + month + day + ".csv";
 			
 			m_current_date = d;
 			m_current_file = readFile(filename, StandardCharsets.UTF_8).split("[\\r\\n]+");

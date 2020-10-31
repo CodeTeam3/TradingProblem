@@ -8,13 +8,8 @@
 
 public class Tickers {
 	
-	static Ticker AAPL = new Ticker("AAPL", 310.00);
-	static Ticker SPY = new Ticker("SPY", 305.00);
-	static Ticker TSLA = new Ticker("TSLA", 850.00);
-	static Ticker WMT = new Ticker("WMT", 130.00);
-	static Ticker NCLH = new Ticker("NCLH", 15.00);
-	
-	static Ticker[] tickers = {AAPL, TSLA, WMT, SPY, NCLH};
+
+	static Ticker[] tickers = {};
 	
 	//	Use to find Ticker
 	public Ticker getTicker(String symbol) {
