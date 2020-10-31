@@ -65,7 +65,7 @@ public class CVSReader {
 			month = "05";
 		} else if(month.contentEquals("Jun")){
 			month = "06";
-		} else if(month.contentEquals("Jly")){
+		} else if(month.contentEquals("Jul")){
 			month = "07";
 		} else if(month.contentEquals("Aug")){
 			month = "08";
