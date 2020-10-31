@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CVSReader {
 
@@ -30,7 +31,9 @@ public class CVSReader {
 				
 				//	Symbol, High, Low
 				if(counter > 0) {
-					String date = formatDate(values[1]);
+					String[] d = values[1].split("-");
+					String[] months = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+		        		String date = d[0] + "0" + Arrays.asList(months).indexOf(d[1]) + d[2];
 					data.add(values[0] + " " + date + " " + values[3] + " " + values[4]);
 				}
 				counter += 1;
@@ -45,42 +48,5 @@ public class CVSReader {
 			e.printStackTrace();
 		}
 		return data;
-	}
-
-
-
-	private static String formatDate(String rawDate) {
-		String day = rawDate.substring(0, 2);
-		String month = rawDate.substring(3, 6);
-		
-		if(month.contentEquals("Jan")) {
-			month = "01";
-		} else if(month.contentEquals("Feb")){
-			month = "02";
-		} else if(month.contentEquals("Mar")){
-			month = "03";
-		} else if(month.contentEquals("Apr")){
-			month = "04";
-		} else if(month.contentEquals("May")){
-			month = "05";
-		} else if(month.contentEquals("Jun")){
-			month = "06";
-		} else if(month.contentEquals("Jul")){
-			month = "07";
-		} else if(month.contentEquals("Aug")){
-			month = "08";
-		} else if(month.contentEquals("Sep")){
-			month = "09";
-		} else if(month.contentEquals("Oct")){
-			month = "10";
-		} else if(month.contentEquals("Nov")){
-			month = "11";
-		} else if(month.contentEquals("Dec")){
-			month = "12";
-		}
-		
-		String year = rawDate.substring(7);
-		String date = day + month + year;
-		return date;
 	}
 }
