@@ -51,7 +51,7 @@ public class FindBestTrade {
 				if(symbol.contentEquals(d2symbol)) {
 					double high = Double.parseDouble(d2pieces[2]);
 					double pchng = (high - low)/low * 100;
-					String newEntry = symbol + " " + pieces[1] + " " + df2.format(pchng) +" " + low + " " + high;
+					String newEntry = symbol + " " + pieces[1] + " " + pchng +" " + low + " " + high;
 					percentChg.add(newEntry);
 				}
 			}
@@ -72,8 +72,8 @@ public class FindBestTrade {
 				bhigh = j[4];
 			}
 		}// End
-		String bestOfDay = bestSymbol + " " + date + " " + biggestGain + "% " + bhigh + " "+ blow;
-		//System.out.println(bestOfDay);
+		String bestOfDay = bestSymbol + " " + date + " " + biggestGain + " " + bhigh + " " + blow;
+		System.out.println(bestOfDay);
 		return bestOfDay;
 	}
 }

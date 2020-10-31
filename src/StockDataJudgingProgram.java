@@ -33,6 +33,7 @@ public class StockDataJudgingProgram {
 		double score = 0.00; // variable to hold the score
 
 		try {
+			//	Hard Coded Path (Easier for Testing)
 			String tradesFile = "C:\\Users\\Master oh Master\\Desktop\\Code-A-Thon-2020\\Test\\trading-problem\\src\\stock_test.txt";
 
 			// Get the location of the trades file either by user or by command line

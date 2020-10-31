@@ -1,4 +1,4 @@
-
+import java.util.ArrayList;
 
 //Here is where we initialize all tickers. 
 //An object is created for the account and every account should
@@ -7,13 +7,16 @@
 //all inclusive (eventually).
 
 public class Tickers {
-	
 
-	static Ticker[] tickers = {};
+	static ArrayList<Ticker> tickers = new ArrayList<Ticker>();
+	
+	public void addTicker(Ticker ticker) {
+		tickers.add(ticker);
+	}
 	
 	//	Use to find Ticker
 	public Ticker getTicker(String symbol) {
-		Ticker t = tickers[findTicker(symbol)];
+		Ticker t = tickers.get(findTicker(symbol));
 		return t;
 	}
 	//	Returns index, to find ticker use above ^
@@ -28,13 +31,16 @@ public class Tickers {
 		return -1;
 	}
 	
-	public void updateTicker(String symbol, double newPrice) {
-		int index = findTicker(symbol);
-		tickers[index].setPrice(newPrice);
-	}
-	public Ticker[] getTickers() {
+//	public void updateTicker(String symbol, double newPrice) {
+//		int index = findTicker(symbol);
+//		tickers[index].setPrice(newPrice);
+//	}
+	public  ArrayList<Ticker> getTickers() {
 		return tickers;
 	}
 
+	public void clearTickers() {
+		tickers.clear();
+	}
 
 }

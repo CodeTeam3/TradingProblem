@@ -1,4 +1,6 @@
+import java.io.File;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Main_Test {
 	
@@ -12,29 +14,29 @@ public class Main_Test {
 	//	the values already built in and there is some, although I
 	//	can't promise perfect error detection, it needs more testing. 
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, InterruptedException {
 		
 		// Needs UserName + Password
 		Account a = new Account("Hi", "There");
 		
-		//	Test1: Prints positions (none) and then purchases 1 share of apple and prints our positions again.
-		a.printPositions();	
-		a.buyShares("AAPL", 1);
+		// Should be the path to the biggestgainers.txt
+		File file = new File("C:\\Users\\Master oh Master\\Desktop\\Code-A-Thon-2020\\codeathon-trading-problem\\src\\biggestgainers.txt");
+		Scanner scan = new Scanner(file);
+		while(scan.hasNext()) {
+			try {
+				String[] data = scan.nextLine().split(" ");
+				Ticker New = new Ticker(data[0], Double.parseDouble(data[4]), Double.parseDouble(data[3])); // Symbol, Low, High
+				double toBuy =  Math.floor(a.getCashBalance()/Double.parseDouble(data[3]));
+				a.addTicker(New);
+				a.printPositions();
+				a.buyShares(data[0], toBuy);
+				a.printPositions();
+				a.sellShares(data[0], toBuy);
+			}catch(Exception e) {
+				System.out.println("Error in main");
+			}
+
+		}
 		a.printPositions();
-		
-		//	Test2: Update Price of Apple stock, then shell 3 shares going short (-2) shares. 
-		a.updateTickerPrice("AAPL", 320.00);
-		a.sellShares("AAPL", 3);
-		a.printPositions();
-		
-		//	Test3: Update Price and print, then buy 6 shares (exceeds our buying power) and then reprint. (This is an example of the error handling).
-		a.updateTickerPrice("AAPL", 310.00);
-		a.printPositions();
-		a.buyShares("AAPL", 6);
-		a.printPositions();
-		
-		a.sellShares("AAPL", 5);
-		a.printPositions();
-		
 	}
 }

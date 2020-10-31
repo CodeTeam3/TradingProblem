@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class CVSReader {
 
@@ -30,7 +31,9 @@ public class CVSReader {
 				
 				//	Symbol, High, Low
 				if(counter > 0) {
-					String date = formatDate(values[1]);
+					String[] d = values[1].split("-");
+					String[] months = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+		        		String date = d[0] + "0" + Arrays.asList(months).indexOf(d[1]) + d[2];
 					data.add(values[0] + " " + date + " " + values[3] + " " + values[4]);
 				}
 				counter += 1;
@@ -46,41 +49,55 @@ public class CVSReader {
 		}
 		return data;
 	}
+}import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
+public class CVSReader {
 
-
-	private static String formatDate(String rawDate) {
-		String day = rawDate.substring(0, 2);
-		String month = rawDate.substring(3, 6);
-		
-		if(month.contentEquals("Jan")) {
-			month = "01";
-		} else if(month.contentEquals("Feb")){
-			month = "02";
-		} else if(month.contentEquals("Mar")){
-			month = "03";
-		} else if(month.contentEquals("Apr")){
-			month = "04";
-		} else if(month.contentEquals("May")){
-			month = "05";
-		} else if(month.contentEquals("Jun")){
-			month = "06";
-		} else if(month.contentEquals("Jul")){
-			month = "07";
-		} else if(month.contentEquals("Aug")){
-			month = "08";
-		} else if(month.contentEquals("Sep")){
-			month = "09";
-		} else if(month.contentEquals("Oct")){
-			month = "10";
-		} else if(month.contentEquals("Nov")){
-			month = "11";
-		} else if(month.contentEquals("Dec")){
-			month = "12";
+//	public static void main(String[] args) {
+//		
+//		ArrayList<String> paths = GetMarketData.getFiles();
+//		System.out.println(paths.size());
+//		
+////		for(String p : paths) {
+////			System.out.println(p);
+////			getContents(p);
+////		}
+//		
+//	}
+	
+	static ArrayList<String> getContents(String path) {
+		String line = "";
+		ArrayList<String> data = new ArrayList<String>();
+		int counter = 0;
+		//	Reads File And Creates ArrayList
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(path));
+			while((line = br.readLine()) != null) {
+				String[] values = line.split(",");
+				
+				//	Symbol, High, Low
+				if(counter > 0) {
+					String[] d = values[1].split("-");
+					String[] months = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
+		        		String date = d[0] + "0" + Arrays.asList(months).indexOf(d[1]) + d[2];
+					data.add(values[0] + " " + date + " " + values[3] + " " + values[4]);
+				}
+				counter += 1;
+				//System.out.println(values[0]);
+			}
+			br.close();
+		} catch (FileNotFoundException e) {
+			System.out.println("Error finding File!");
+			e.printStackTrace();
+		}  catch (IOException e) {
+			System.out.println("Error finding File!");
+			e.printStackTrace();
 		}
-		
-		String year = rawDate.substring(7);
-		String date = day + month + year;
-		return date;
+		return data;
 	}
 }
