@@ -31,9 +31,10 @@ public class CVSReader {
 				
 				//	Symbol, High, Low
 				if(counter > 0) {
-					String[] d = values[1].split("-");
+					String[] d = values.split("-");
 					String[] months = {"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"};
-		        		String date = d[0] + "0" + Arrays.asList(months).indexOf(d[1]) + d[2];
+					int monthNo = Arrays.asList(months).indexOf(d[1]) + 1;
+					String date = d[0] + ((monthNo >= 10)?""+monthNo:"0"+ monthNo)+ d[2];
 					data.add(values[0] + " " + date + " " + values[3] + " " + values[4]);
 				}
 				counter += 1;
